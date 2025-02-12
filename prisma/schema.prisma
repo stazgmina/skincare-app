@@ -13,11 +13,61 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-///
-/// ENUMS
-///
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  routines  Routine[] @relation("UserRoutines")
+  savedRoutines Routine[] @relation("SavedRoutines")
+  likedRoutines Routine[] @relation("LikedRoutines")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
-enum Weekday {
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  brand       String
+  description String?
+  imageUrl    String?
+  category    String?
+  price       Float?
+  routineSteps RoutineStep[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Routine {
+  id          String   @id @default(uuid())
+  name        String
+  user        User     @relation("UserRoutines", fields: [userId], references: [id])
+  userId      String
+  steps       RoutineStep[]
+  likedBy     User[]   @relation("LikedRoutines")
+  savedBy     User[]   @relation("SavedRoutines")
+  likes       Int      @default(0)
+  isPublic    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model RoutineStep {
+  id          String   @id @default(uuid())
+  routine     Routine  @relation(fields: [routineId], references: [id])
+  routineId   String
+  product     Product  @relation(fields: [productId], references: [id])
+  productId   String
+  dayOfWeek   DayOfWeek
+  timeSlot    TimeSlot
+  order       Int
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([routineId, dayOfWeek, timeSlot, order])
+}
+
+enum DayOfWeek {
   MONDAY
   TUESDAY
   WEDNESDAY
@@ -27,124 +77,7 @@ enum Weekday {
   SUNDAY
 }
 
-enum Timeslot {
+enum TimeSlot {
   MORNING
-  MIDDAY
   EVENING
-}
-
-///
-/// You can add more sources if needed
-///
-enum Source {
-  NOTINO
-  EPHORA
-  // Add other sources as required
-}
-
-///
-/// MODELS
-///
-
-model User {
-  id         Int      @id @default(autoincrement())
-  email      String   @unique
-  password   String
-  name       String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  // Routines that this user has created
-  routines   Routine[]
-
-  // Routines that this user has liked
-  likes      Like[]
-
-  // Follow relationships:
-  // "following" are the Follow records where this user is the follower.
-  following  Follow[] @relation("Following")
-  // "followers" are the Follow records where this user is being followed.
-  followers  Follow[] @relation("Followers")
-}
-
-model Routine {
-  id          Int             @id @default(autoincrement())
-  title       String
-  description String?
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @updatedAt
-
-  // The creator of the routine
-  userId      Int
-  author      User            @relation(fields: [userId], references: [id])
-
-  // The grid “cells” for this routine
-  entries     RoutineEntry[]
-
-  // Likes on this routine
-  likes       Like[]
-}
-
-model RoutineEntry {
-  id         Int       @id @default(autoincrement())
-  routineId  Int
-  day        Weekday
-  timeslot   Timeslot
-
-  // Link back to the parent routine
-  routine    Routine   @relation(fields: [routineId], references: [id])
-
-  // A many-to-many relationship with products.
-  // This lets you assign one or several products to this grid cell.
-  products   Product[] @relation("RoutineEntryProducts")
-
-  // Ensure each (routine, day, timeslot) combination is unique.
-  @@unique([routineId, day, timeslot])
-}
-
-model Product {
-  id          Int              @id @default(autoincrement())
-  name        String
-  description String?
-  brand       String?
-  price       Float?
-  url         String?
-  source      Source
-
-  // Back–relation to all routine entries that include this product.
-  routineEntries RoutineEntry[] @relation("RoutineEntryProducts")
-}
-
-///
-/// A model for “liking” a routine. This is a join table that records which user liked which routine.
-/// An explicit model is used so you can easily add extra fields (e.g. a timestamp) if needed.
-///
-model Like {
-  id         Int      @id @default(autoincrement())
-  userId     Int
-  routineId  Int
-  createdAt  DateTime @default(now())
-  
-  user       User     @relation(fields: [userId], references: [id])
-  routine    Routine  @relation(fields: [routineId], references: [id])
-  
-  @@unique([userId, routineId])
-}
-
-///
-/// A model to handle following relationships between users.
-/// Each record indicates that a given user (follower) is following another user (following).
-///
-model Follow {
-  id           Int      @id @default(autoincrement())
-  followerId   Int
-  followingId  Int
-  createdAt    DateTime @default(now())
-
-  // The user who is following
-  follower     User     @relation("Following", fields: [followerId], references: [id])
-  // The user being followed
-  following    User     @relation("Followers", fields: [followingId], references: [id])
-
-  @@unique([followerId, followingId])
 }
