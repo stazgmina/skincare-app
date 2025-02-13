@@ -1,5 +1,5 @@
 'use client'
-
+import Link from 'next/link'
 import React from 'react'
 
 const login = () => {
@@ -33,7 +33,7 @@ const login = () => {
           </button>
         </form>
         <p className="text-center">
-          Don't have an account yet? Register.
+          Don't have an account yet? <Link href={"/pages/register"}>Register.</Link>
         </p>
       </section>
     </main>
