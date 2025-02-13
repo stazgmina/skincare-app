@@ -1,24 +1,43 @@
+'use client'
+
 import React from 'react'
 
-const Login = () => {
+const login = () => {
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault()
+    // Handle form submission, send data through JSON
+  }
+
   return (
-    <div>
-      <h1>Login</h1>
-      <form>
-        <label>
-          Username:
-          <input type="text" name="username" />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" name="password" />
-        </label>
-        <br />
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <main className="flex flex-col md:flex-row">
+      <section className="bg-[url('/banner.webp')]  bg-cover bg-center grid place-items-center p-8 order-2 md:order-1 h-[500px] md:h-screen w-screen md:w-1/2">
+        <h1 className='text-center text-4xl text-pink-800'>
+          Join<br/> 
+          the<br/>  
+          Helldivers
+        </h1>
+      </section>
+      <section className="grid place-items-center order-1 md:order-2 h-1/2 md:h-screen w-screen md:w-1/2 p-8 text-pink-500">
+        <h1 className="text-2xl bg-gradient-to-r from-pink-500 to-pink-200 p-4 w-full max-w-[500px] text-white text-center rounded-full">
+          Login
+        </h1>
+        <form onSubmit={handleSubmit} className="grid place-items-center gap-2 w-full">
+          <label htmlFor="username">Username:</label>
+          <input type="text" id="username" name="username" required className="border-2 border-pink-200 rounded-full p-2 w-full max-w-[500px]"/>
+          
+          <label htmlFor="password">Password:</label>
+          <input type="password" id="password" name="password" required className="border-2 border-pink-200 rounded-full p-2 w-full max-w-[500px]"/>
+          
+          <button type="submit" className="border border-pink-200 rounded-full bg-gradient-to-r from-pink-500 to-pink-200 text-white py-2 px-6 w-full max-w-[250px]">
+            Login
+          </button>
+        </form>
+        <p className="text-center">
+          Don't have an account yet? Register.
+        </p>
+      </section>
+    </main>
   )
 }
 
-export default Login
+export default login
