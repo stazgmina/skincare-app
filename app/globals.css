@@ -9,7 +9,7 @@
   outline: none;
 }
 
-.login-button {
+.auth-button {
   background: linear-gradient(25deg,
     #ec4899 0%,           /* pink-500 */
     #f472b6 25%,          /* pink-400 */
@@ -21,14 +21,14 @@
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.login-button:hover {
+.auth-button:hover {
   animation: gradient-flow 10s infinite linear;
   transform: scale(1.05);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   font-weight: bold;
 }
 
-.login-button:active {
+.auth-button:active {
   transform: scale(0.95);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
