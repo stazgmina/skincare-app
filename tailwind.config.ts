@@ -8,6 +8,15 @@ export default {
   ],
   theme: {
     extend: {
+      keyframes: {
+        animate: {
+          '0%': { 'background-position': '0%' },
+          '100%': { 'background-position': '400%' },
+        },
+      },
+      animation: {
+        animate: 'animate 10s linear infinite',
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
