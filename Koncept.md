@@ -62,3 +62,4 @@ Skincare Planner to aplikacja do zarządzania rutyną pielęgnacyjną, integruj�
 ## **5. Cel aplikacji**
 Ułatwienie użytkownikom planowania i realizacji rutyn pielęgnacyjnych, integracja społeczności beauty oraz stworzenie nowoczesnej platformy zakupowej z personalizowanymi rekomendacjami i interakcją użytkowników.
 
+Automatyczne generowanie rutyn dla nowych użytkowników na podstawie quizu.
