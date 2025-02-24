@@ -49,7 +49,7 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({ products }) => {
 
   return (
     <div 
-      className="fixed bottom-0 left-0 right-0 overflow-hidden border border-t-2 border-pink-200 bg-white rounded-lg"
+      className="md:static fixed bottom-0 left-0 right-0 overflow-hidden border border-t-2 border-pink-200 bg-white rounded-lg"
       style={{ height: `${drawerHeight}px`, transition: lastY ? 'none' : 'height 0.2s' }}
       aria-label="Expandable drawer"
     >
