@@ -11,9 +11,9 @@ interface DayPlannerProps {
 const DayPlanner: React.FC<DayPlannerProps> = ({ desktop }) => {
   if (desktop) {
     return (
-      <div className="flex overflow-x-auto bg-white text-pink-500">
+      <div className="flex h-full overflow-x-auto bg-white text-pink-500">
         {days.map(day => (
-          <div key={day} className="flex flex-col h-full border border-pink-200">
+          <div key={day} className="flex flex-col border border-pink-200">
             <div className="py-2 bg-gradient-to-r from-pink-600 to-pink-300 text-center font-bold text-lg text-white">
               {day}
             </div>
@@ -24,7 +24,7 @@ const DayPlanner: React.FC<DayPlannerProps> = ({ desktop }) => {
               <div className="border rounded-md shadow border-pink-200 p-4 w-[250px] aspect-square flex items-center justify-center" role="region" aria-label="Afternoon Time Slot">
                 <BsSun className="text-pink-500 text-2xl" />
               </div>
-              <div className="border rounded-md shadow border-pink-200 p-4 w-full aspect-square flex items-center justify-center" role="region" aria-label="Evening Time Slot">
+              <div className="border rounded-md shadow border-pink-200 p-4 w-[250px] aspect-square flex items-center justify-center" role="region" aria-label="Evening Time Slot">
                 <BsMoon className="text-pink-500 text-2xl" />
               </div>
             </div>
