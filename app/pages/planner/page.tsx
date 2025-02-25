@@ -61,17 +61,33 @@ const Planner = () => {
   return (
     <main role="main" className="min-h-screen flex flex-col">
       <NavBar />
+
       {/* Desktop layout */}
       <div className="hidden lg:flex flex-1">
-        <article className="w-5/6 lg:p-4">
-          <DayPlanner desktop />
+        <article className="w-5/6 lg:p-2">
+          <div className="overflow-x-auto h-full">
+            <div className="min-w-[1200px] h-full">
+              <DayPlanner desktop />
+            </div>
+          </div>
         </article>
         <aside className="w-1/6">
           <Sidebar products={products} />
         </aside>
       </div>
+
+      {/* Tablet layout */}
+      <div className="hidden md:flex lg:hidden flex-1">
+        <article className="flex-1 p-2">
+          <DayPlanner />  {/* remains in mobile state */}
+        </article>
+        <aside className="w-1/3 p-2">
+          <Sidebar products={products} />
+        </aside>
+      </div>
+
       {/* Mobile layout */}
-      <div className="lg:hidden flex flex-col flex-1">
+      <div className="md:hidden flex flex-col flex-1">
         <article className="flex-1">
           <DayPlanner />
         </article>

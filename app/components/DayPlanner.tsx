@@ -11,21 +11,21 @@ interface DayPlannerProps {
 const DayPlanner: React.FC<DayPlannerProps> = ({ desktop }) => {
   if (desktop) {
     return (
-      <div className="flex h-full overflow-y-auto bg-white text-pink-500">
+      <div className="flex h-full overflow-x-auto bg-white text-pink-500">
         {days.map(day => (
-          <div key={day} className="flex flex-col h-full flex-1 border border-pink-200">
+          <div key={day} className="flex flex-col border border-pink-200">
             <div className="py-2 bg-gradient-to-r from-pink-600 to-pink-300 text-center font-bold text-lg text-white">
               {day}
             </div>
-            <div className="flex flex-col gap-2 lg:gap-0 p-2 lg:p-0 flex-1">
-              <div className="border rounded-md shadow border-pink-200 p-4 flex-1 flex items-start justify-start" role="region" aria-label='Morning Time Slot'>
-                <BsCloudSun className="text-pink-500 text-3xl" />
+            <div className="grid grid-rows-3">
+              <div className="border rounded-md shadow border-pink-200 p-4 w-[250px] aspect-square flex items-center justify-center" role="region" aria-label="Morning Time Slot">
+                <BsCloudSun className="text-pink-500 text-2xl" />
               </div>
-              <div className="border rounded-md shadow border-pink-200 p-4 flex-1 flex items-start justify-start" role="region" aria-label='Afternoon Time Slot'>
-                <BsSun className="text-pink-500 text-3xl" />
+              <div className="border rounded-md shadow border-pink-200 p-4 w-[250px] aspect-square flex items-center justify-center" role="region" aria-label="Afternoon Time Slot">
+                <BsSun className="text-pink-500 text-2xl" />
               </div>
-              <div className="border rounded-md shadow border-pink-200 p-4 flex-1 flex items-start justify-start" role="region" aria-label='Evening Time Slot'>
-                <BsMoon className="text-pink-500 text-3xl" />
+              <div className="border rounded-md shadow border-pink-200 p-4 w-[260px] aspect-square flex items-center justify-center" role="region" aria-label="Evening Time Slot">
+                <BsMoon className="text-pink-500 text-2xl" />
               </div>
             </div>
           </div>
